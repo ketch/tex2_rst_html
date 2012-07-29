@@ -1,5 +1,5 @@
 This repository contains some fairly crude but functional tools for converting
-laTeX and Bibtex files to ReStructured Text (.rst) files. The tex2rst functions
+laTeX and Bibtex files to ReStructured Text (.rst) and html files. The tex2rst functions
 are in many places specific to converting old Clawpack documentation, but may
 still be a useful starting place for other purposes. Also, note that these do
 not constitute a real TeX parser by any stretch of the imagination. The
