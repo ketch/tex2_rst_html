@@ -87,7 +87,7 @@ def write_entry(pub,f):
 
     f.write('<div id="pub">\n')
     if pub.has_key('url'):
-        f.write('<a href="'+pub['url'].split()[0]+'">')
+        f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
     f.write('<name> %s </name><br>\n' % pub['title'])
     if pub.has_key('url'):
         f.write('</a>\n')
@@ -102,12 +102,10 @@ def write_entry(pub,f):
                     f.write(":%s" % pub['pages'].replace('&ndash;','-'))
     if 'annote' in pub.keys():
         f.write(" %s" % pub['annote'])
-    try:
+    if pub['year'] != '':
         f.write(" (%s)" % pub['year'])
-    except KeyError:
-        print 'No year in pub %s' % pub['pid']
     f.write('\n</div>\n\n')
 
 def sort_by_year(publications):
     """Takes a list of publications and return it sorted in reverse chronological order."""
-    return sorted(publications, key=lambda p: p['year'],reverse=True)
+    return sorted(publications, key=lambda p: p.setdefault('year',''),reverse=True)
