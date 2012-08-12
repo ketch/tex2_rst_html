@@ -104,6 +104,13 @@ def write_entry(pub,f):
         f.write(" %s" % pub['annote'])
     if pub['year'] != '':
         f.write(" (%s)" % pub['year'])
+    if ('doi' in pub.keys()) | ('ARXIVID' in pub.keys()):
+        f.write('<br>\n<links> ')
+        if 'doi' in pub.keys():
+            f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">DOI</a> | ')
+        if 'ARXIVID' in pub.keys():
+            f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv</a> | ')
+        f.write('</links>')
     f.write('\n</div>\n\n')
 
 def sort_by_year(publications):
