@@ -1,7 +1,7 @@
 """
 Convert bibtex files (.bib) to html divs that can be custom formatted using CSS.
 Usage:
-    >> from bibtex2rst import bibtex2rst
+    >> import bibtex2htmldiv
     >> bibtex2htmldiv.bib2html('/path/to/myfile.bib')
 
 """
@@ -104,13 +104,17 @@ def write_entry(pub,f):
         f.write(" %s" % pub['annote'])
     if pub['year'] != '':
         f.write(" (%s)" % pub['year'])
-    if ('doi' in pub.keys()) | ('ARXIVID' in pub.keys()):
-        f.write('<br>\n<links> ')
-        if 'doi' in pub.keys():
-            f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">DOI</a> | ')
-        if 'ARXIVID' in pub.keys():
-            f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv</a> | ')
-        f.write('</links>')
+
+    # Write links line
+    f.write('<br>\n<links> ')
+    if 'url' in pub.keys():
+        f.write(' | <a href="'+pub['url'].split()[0]+'">Download</a> | ')
+    if 'doi' in pub.keys():
+        f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">DOI</a> | ')
+    if 'ARXIVID' in pub.keys():
+        f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv</a> | ')
+    f.write('</links>')
+
     f.write('\n</div>\n\n')
 
 def sort_by_year(publications):
