@@ -108,11 +108,22 @@ def write_entry(pub,f):
     # Write links line
     f.write('<br>\n<links> ')
     if 'url' in pub.keys():
-        f.write(' | <a href="'+pub['url'].split()[0]+'">Download</a> | ')
+        if 'arxiv' not in pub['url'].split()[0]:
+            f.write(' | <a href="'+pub['url'].split()[0]+'">More information</a> | ')
     if 'doi' in pub.keys():
-        f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">DOI</a> | ')
+        f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">Published version</a> | ')
     if 'ARXIVID' in pub.keys():
-        f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv</a> | ')
+        f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv version</a> | ')
+
+    try:
+        from paperlinks import links
+        if pub['pid'] in links.keys():
+            publinks = links[pub['pid']]
+            for name, link in publinks.iteritems():
+                f.write(' | <a href="'+link+'">'+name+'</a> | ')
+    except:
+        print 'paperlinks not found; continuing...'
+
     f.write('</links>')
 
     f.write('\n</div>\n\n')
