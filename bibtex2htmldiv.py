@@ -63,7 +63,7 @@ def writebib(publications,filename='bib.rst'):
     """
     f=file(filename,'w')
 
-    write_section('Preprints','UnpublishedReference',publications,f)
+    write_section('Submitted preprints','UnpublishedReference',publications,f)
     write_section('Refereed Journal Articles','ArticleReference',publications,f)
     write_section('Books','BookReference',publications,f)
     write_section('Conference Proceedings','InproceedingsReference',publications,f)
@@ -86,10 +86,14 @@ def write_entry(pub,f):
     pub['author'][0] = normalize_authors(pub['author'][0])
 
     f.write('<div id="pub">\n')
-    if pub.has_key('url'):
+    if 'doi' in pub.keys():
+        f.write('<a href="http://dx.doi.org/'+pub['doi']+'">')
+    elif pub.has_key('url'):
         f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
+    elif pub.has_key('ARXIVID'):
+        f.write('<a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">')
     f.write('<name> %s </name><br>\n' % pub['title'])
-    if pub.has_key('url'):
+    if pub.has_key('url') or pub.has_key('doi') or pub.has_key('ARXIVID'):
         f.write('</a>\n')
     f.write('<authors> %s</authors>,\n' % pub['author'][0])
     if 'journal' in pub.keys():
@@ -102,6 +106,10 @@ def write_entry(pub,f):
                     f.write(":%s" % pub['pages'].replace('&ndash;','-'))
     if 'annote' in pub.keys():
         f.write(" %s" % pub['annote'])
+    if 'school' in pub.keys():
+        f.write(" %s," % pub['school'])
+    if 'booktitle' in pub.keys():
+        f.write("in %s." % pub['booktitle'])
     if pub['year'] != '':
         f.write(" (%s)" % pub['year'])
 
