@@ -5,6 +5,11 @@ Usage:
     >> bibtex2htmldiv.bib2html('/path/to/myfile.bib')
 
 """
+import os
+# This may need to be changed for other machines/users
+img_path = r'/Users/ketch/Box Sync/My Papers/paper_images/'
+# This may need to be changed for other sites
+img_dest = '/assets/paper_images/'
 
 def bib2html(bibfile,htmlfile='bib.html'):
     publications=parsefile(bibfile)
@@ -48,18 +53,13 @@ def normalize_authors(authors):
     else:
         return ' '.join(authornames)
 
+
 def writebib(publications,filename='bib.rst'):
     """
     Writes html citation entries.
     This only works well for articles so far; for other citation types,
     it merely writes the author, title, and year.  It should be easy to
     add better functionality for other types.
-
-    To Do:
-        - Sections for different publication types or years
-        - links
-        - bibtex?
-        - doi
     """
     f=file(filename,'w')
 
@@ -72,6 +72,7 @@ def writebib(publications,filename='bib.rst'):
 
     f.close()
 
+
 def write_section(title,reference_type,publications,f):
     """
     Write out all entries of type reference_type, in reverse chronological order
@@ -82,10 +83,14 @@ def write_section(title,reference_type,publications,f):
         f.write('<h2>'+title+'</h2>\n')
         for pub in these_pubs: write_entry(pub,f)
 
+
 def write_entry(pub,f):
     pub['author'][0] = normalize_authors(pub['author'][0])
 
     f.write('<div id="pub">\n')
+    img_file = img_path + pub['pid'] + '.png'
+    if os.path.isfile(os.path.abspath(img_file)):
+        f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
     if pub.has_key('url'):
         f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
     f.write('<name> %s </name><br>\n' % pub['title'])
@@ -122,10 +127,10 @@ def write_entry(pub,f):
             for name, link in publinks.iteritems():
                 f.write(' | <a href="'+link+'">'+name+'</a> | ')
     except:
-        print 'paperlinks not found; continuing...'
+        print 'paperlinks.py not found; continuing...'
 
     f.write('</links>')
-
+    f.write('<div style="clear:both"></div>\n')
     f.write('\n</div>\n\n')
 
 def sort_by_year(publications):
