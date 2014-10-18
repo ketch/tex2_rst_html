@@ -63,7 +63,7 @@ def writebib(publications,filename='bib.rst'):
     """
     f=file(filename,'w')
 
-    write_section('Preprints','UnpublishedReference',publications,f)
+    write_section('Submitted preprints','UnpublishedReference',publications,f)
     write_section('Refereed Journal Articles','ArticleReference',publications,f)
     write_section('Books','BookReference',publications,f)
     write_section('Conference Proceedings','InproceedingsReference',publications,f)
@@ -91,10 +91,14 @@ def write_entry(pub,f):
     img_file = img_path + pub['pid'] + '.png'
     if os.path.isfile(os.path.abspath(img_file)):
         f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
-    if pub.has_key('url'):
+    if 'doi' in pub.keys():
+        f.write('<a href="http://dx.doi.org/'+pub['doi']+'">')
+    elif pub.has_key('url'):
         f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
+    elif pub.has_key('ARXIVID'):
+        f.write('<a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">')
     f.write('<name> %s </name><br>\n' % pub['title'])
-    if pub.has_key('url'):
+    if pub.has_key('url') or pub.has_key('doi') or pub.has_key('ARXIVID'):
         f.write('</a>\n')
     f.write('<authors> %s</authors>,\n' % pub['author'][0])
     if 'journal' in pub.keys():
@@ -107,29 +111,37 @@ def write_entry(pub,f):
                     f.write(":%s" % pub['pages'].replace('&ndash;','-'))
     if 'annote' in pub.keys():
         f.write(" %s" % pub['annote'])
+    if 'school' in pub.keys():
+        f.write(" %s," % pub['school'])
+    if 'booktitle' in pub.keys():
+        f.write("in %s." % pub['booktitle'])
     if pub['year'] != '':
         f.write(" (%s)" % pub['year'])
 
     # Write links line
-    f.write('<br>\n<links> ')
+    linkstring = ''
+
     if 'url' in pub.keys():
         if 'arxiv' not in pub['url'].split()[0]:
-            f.write(' | <a href="'+pub['url'].split()[0]+'">More information</a> | ')
+            linkstring += ' | <a href="'+pub['url'].split()[0]+'">More information</a> '
     if 'doi' in pub.keys():
-        f.write(' | <a href="http://dx.doi.org/'+pub['doi']+'">Published version</a> | ')
+        linkstring += ' | <a href="http://dx.doi.org/'+pub['doi']+'">Published version</a> '
     if 'ARXIVID' in pub.keys():
-        f.write(' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv version</a> | ')
+        linkstring += ' | <a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">arXiv version</a> '
 
     try:
         from paperlinks import links
         if pub['pid'] in links.keys():
             publinks = links[pub['pid']]
             for name, link in publinks.iteritems():
-                f.write(' | <a href="'+link+'">'+name+'</a> | ')
+                linkstring += ' | <a href="'+link+'">'+name+'</a> '
     except:
         print 'paperlinks.py not found; continuing...'
 
-    f.write('</links>')
+    if len(linkstring)>0:
+        f.write('<br>\n<links> ')
+        f.write(linkstring)
+        f.write('|</links>')
     f.write('<div style="clear:both"></div>\n')
     f.write('\n</div>\n\n')
 
