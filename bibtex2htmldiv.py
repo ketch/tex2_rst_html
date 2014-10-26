@@ -91,10 +91,10 @@ def write_entry(pub,f):
     img_file = img_path + pub['pid'] + '.png'
     if os.path.isfile(os.path.abspath(img_file)):
         f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
-    if 'doi' in pub.keys():
-        f.write('<a href="http://dx.doi.org/'+pub['doi']+'">')
-    elif pub.has_key('url'):
+    if pub.has_key('url'):
         f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
+    elif 'doi' in pub.keys():
+        f.write('<a href="http://dx.doi.org/'+pub['doi']+'">')
     elif pub.has_key('ARXIVID'):
         f.write('<a href="http://arxiv.org/abs/'+pub['ARXIVID']+'">')
     f.write('<name> %s </name><br>\n' % pub['title'])
@@ -123,7 +123,8 @@ def write_entry(pub,f):
 
     if 'url' in pub.keys():
         if 'arxiv' not in pub['url'].split()[0]:
-            linkstring += ' | <a href="'+pub['url'].split()[0]+'">More information</a> '
+            if 'davidketcheson' in pub['url'].split()[0]:
+                linkstring += ' | <a href="'+pub['url'].split()[0]+'">Free PDF</a> '
     if 'doi' in pub.keys():
         linkstring += ' | <a href="http://dx.doi.org/'+pub['doi']+'">Published version</a> '
     if 'ARXIVID' in pub.keys():

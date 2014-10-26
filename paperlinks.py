@@ -66,5 +66,9 @@ links = {
     '2014_cylindrical_solitary_waves' :
     {
     'Free Postprint' : 'http://davidketcheson.info/assets/papers/2014_cylindrical_solitary_waves_postprint.pdf'
+    },
+    '2014_partitioned_multirate' :
+    {
+    'Free Postprint' : 'http://davidketcheson.info/assets/papers/2014_partitioned_multirate_postprint.pdf'
     }
 }
