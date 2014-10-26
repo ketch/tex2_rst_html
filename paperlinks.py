@@ -19,10 +19,6 @@ links = {
     {
     'Code' : 'http://github.com/ketch/high_order_RK_RR/'
     },
-    '2008_explicit_ssp':
-    {
-    'Free PDF' : 'http://archive.kaust.edu.sa/kaust/bitstream/10754/136932/1/explicit_ssp.pdf'
-    },
     '2009_ssp_review':
     {
     'Post-print' : 'http://www.davidketcheson.info/assets/papers/sspreview.pdf'
@@ -34,10 +30,6 @@ links = {
     '2010_LSRK':
     {
     'Post-print' : 'http://www.davidketcheson.info/assets/papers/2010_LSRK_postprint.pdf'
-    },
-    '2009_monotonicity-glms':
-    {
-    'Free PDF' :'http://archive.kaust.edu.sa/kaust/bitstream/10754/138431/1/compotonicity-glms.pdf'
     },
     '2014_ssp_rkdg':
     {
@@ -56,7 +48,6 @@ links = {
     {
     'Reproducibility repository' : 'http://bitbucket.org/ahmadia/pyclaw-sisc-rr',
     'Figures with interactive code' : 'http://numerics.kaust.edu.sa/papers/pyclaw-sisc/pyclaw-sisc.html',
-    'Free PDF' : 'http://davidketcheson.info/papers/2012_pyclaw-sisc.pdf'
     },
 
     '2012_optimal_stability_polynomials' :
@@ -67,11 +58,6 @@ links = {
     '2013_sd_erk' :
     {
     'Reproducibility repository' : 'http://github.com/ketch/optimized-erk-sd-rr'
-    },
-
-    '2013_sharpclaw' :
-    {
-    'Free PDF' : 'http://davidketcheson.info/papers/sharpclaw.pdf'
     },
     'Alghamdi2012' :
     {
