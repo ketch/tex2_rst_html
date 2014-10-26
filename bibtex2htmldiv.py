@@ -9,7 +9,7 @@ import os
 # This may need to be changed for other machines/users
 img_path = r'/Users/ketch/Box Sync/My Papers/paper_images/'
 # This may need to be changed for other sites
-img_dest = '/assets/paper_images/'
+img_dest = 'http://davidketcheson.info/assets/paper_images/'
 
 def bib2html(bibfile,htmlfile='bib.html'):
     publications=parsefile(bibfile)
