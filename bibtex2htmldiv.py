@@ -87,11 +87,12 @@ def write_section(title,reference_type,publications,f):
 def write_entry(pub,f):
     pub['author'][0] = normalize_authors(pub['author'][0])
 
-    f.write('<div id="pub" class="pub ')
+    f.write('<div id="pub" class="pub filterable ')
     if pub.has_key('keywords'):
         f.write(' '.join(pub['keywords']).lower().replace(';',''))
     f.write('">\n')
     img_file = img_path + pub['pid'] + '.png'
+    print img_file
     if os.path.isfile(os.path.abspath(img_file)):
         f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
     if pub.has_key('url'):
