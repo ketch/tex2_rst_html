@@ -1,6 +1,7 @@
 """
 Convert bibtex files (.bib) to html divs that can be custom formatted using CSS.
-Usage:
+Usage (from Python or IPython prompt):
+
     >> import bibtex2htmldiv
     >> bibtex2htmldiv.bib2html('/path/to/myfile.bib')
 
