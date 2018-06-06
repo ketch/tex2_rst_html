@@ -1,4 +1,3 @@
-from strmanip import *
 
 #======================
 def clawdocconvert():

@@ -1,2 +1,2 @@
-import bibtex2rst
-import bibtex2htmldiv
+from . import bibtex2rst
+from . import bibtex2htmldiv

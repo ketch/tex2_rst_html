@@ -56,7 +56,7 @@ def writebib(entries,filename='bib.rst'):
         try:
             f.write(" (%s)" % entry['year'])
         except KeyError:
-            print 'No year in entry %s' % entry['pid']
+            print('No year in entry %s' % entry['pid'])
         f.write("\n\n")
 
     f.close()
