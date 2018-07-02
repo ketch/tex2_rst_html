@@ -114,7 +114,7 @@ def write_entry(pub,f):
     if 'Url' in pub:
         f.write('<a href="'+pub['Url'].split()[0].replace('\_','_')+'">')
     elif 'Doi' in pub.keys():
-        f.write('<a href="http://dx.doi.org/'+pub['Doi']+'">')
+        f.write('<a href="https://doi.org/'+pub['Doi']+'">')
     elif 'Arxivid' in pub:
         f.write('<a href="http://arxiv.org/abs/'+pub['Arxivid']+'">')
     f.write('<name> %s </name><br>\n' % pub['Title'])
@@ -146,7 +146,7 @@ def write_entry(pub,f):
             if 'davidketcheson' in pub['Url'].split()[0]:
                 linkstring += ' | <a href="'+pub['Url'].split()[0]+'">Free PDF</a> '
     if 'Doi' in pub.keys():
-        linkstring += ' | <a href="http://dx.doi.org/'+pub['Doi']+'">Published version</a> '
+        linkstring += ' | <a href="https://doi.org/'+pub['Doi']+'">Published version</a> '
     if 'Arxivid' in pub.keys():
         linkstring += ' | <a href="http://arxiv.org/abs/'+pub['Arxivid']+'">arXiv version</a> '
 
