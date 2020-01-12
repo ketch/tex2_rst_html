@@ -11,10 +11,6 @@ links = {
     {
     'Code' : 'http://sspsite.org'
     },
-    'quezada_diffractons':
-    {
-    'Reproducibility repository' : 'http://github.com/ketch/diffractons_RR'
-    },
     '2014_hork':
     {
     'Code' : 'http://github.com/ketch/high_order_RK_RR/'
@@ -70,5 +66,21 @@ links = {
     '2014_partitioned_multirate' :
     {
     'Free Postprint' : 'http://davidketcheson.info/assets/papers/2014_partitioned_multirate_postprint.pdf'
+    },
+    '2015_diffractons':
+    {
+    'Reproducibility repository': 'https://github.com/ketch/diffractons_RR'
+    },
+    '2019_characteristics':
+    {
+    'Reproducibility repository': 'https://github.com/ketch/characteristics_rr'
+    },
+    '2019_solitarysw':
+    {
+    'Reproducibility repository': 'https://github.com/manuel-quezada/water_wave_diffractons_RR'
+    },
+    '2019_energyRRK':
+    {
+    'Reproducibility repository': 'https://github.com/ketch/RRK_rr'
     }
 }
