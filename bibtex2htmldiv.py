@@ -117,7 +117,7 @@ def write_entry(pub,f):
         f.write('<a href="https://doi.org/'+pub['Doi']+'">')
     elif 'Arxivid' in pub:
         f.write('<a href="http://arxiv.org/abs/'+pub['Arxivid']+'">')
-    f.write('<name> %s </name><br>\n' % pub['Title'])
+    f.write('<name> %s </name><br>\n' % pub['Title'].replace('{','').replace('}',''))
     if ('Url' in pub) or ('Doi' in pub) or ('Arxivid' in pub):
         f.write('</a>\n')
     f.write('<authors> %s</authors>,\n' % pub['author'])
