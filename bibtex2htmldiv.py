@@ -104,51 +104,51 @@ def write_entry(pub,f):
     pub['author'] = normalize_authors(pub['author'])
 
     f.write('<div id="pub" class="pub filterable ')
-    if 'Keywords' in pub:
-        f.write(pub['Keywords'].lower().replace(';',' ').replace(',',' '))
+    if 'keywords' in pub:
+        f.write(pub['keywords'].lower().replace(';',' ').replace(',',' '))
     f.write('">\n')
     img_file = img_path + pub['pid'] + '.png'
     print(img_file)
     if os.path.isfile(os.path.abspath(img_file)):
         f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
-    if 'Url' in pub:
-        f.write('<a href="'+pub['Url'].split()[0].replace('\_','_')+'">')
-    elif 'Doi' in pub.keys():
-        f.write('<a href="https://doi.org/'+pub['Doi']+'">')
-    elif 'Arxivid' in pub:
-        f.write('<a href="http://arxiv.org/abs/'+pub['Arxivid']+'">')
-    f.write('<name> %s </name><br>\n' % pub['Title'].replace('{','').replace('}',''))
-    if ('Url' in pub) or ('Doi' in pub) or ('Arxivid' in pub):
+    if 'url' in pub:
+        f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
+    elif 'doi' in pub.keys():
+        f.write('<a href="https://doi.org/'+pub['doi']+'">')
+    elif 'arxivid' in pub:
+        f.write('<a href="http://arxiv.org/abs/'+pub['arxivid']+'">')
+    f.write('<name> %s </name><br>\n' % pub['title'].replace('{','').replace('}',''))
+    if ('url' in pub) or ('doi' in pub) or ('arxivid' in pub):
         f.write('</a>\n')
     f.write('<authors> %s</authors>,\n' % pub['author'])
-    if 'Journal' in pub.keys():
-        f.write('<journal> %s</journal>' % pub['Journal'])
-        if 'Volume' in pub.keys():
-            f.write(", %s" % pub['Volume'])
-            if 'Number' in pub.keys():
-                f.write("(%s)" % pub['Number'])
-                if 'Pages' in pub.keys():
-                    f.write(":%s" % pub['Pages'].replace('&ndash;','-'))
-    if 'Annote' in pub.keys():
-        f.write(" %s" % pub['Annote'])
-    if 'School' in pub.keys():
-        f.write(" %s," % pub['School'])
-    if 'Booktitle' in pub.keys():
-        f.write("in %s." % pub['Booktitle'])
-    if pub['Year'] != '':
-        f.write(" (%s)" % pub['Year'])
+    if 'journal' in pub.keys():
+        f.write('<journal> %s</journal>' % pub['journal'])
+        if 'volume' in pub.keys():
+            f.write(", %s" % pub['volume'])
+            if 'number' in pub.keys():
+                f.write("(%s)" % pub['number'])
+                if 'pages' in pub.keys():
+                    f.write(":%s" % pub['pages'].replace('&ndash;','-'))
+    if 'annote' in pub.keys():
+        f.write(" %s" % pub['annote'])
+    if 'school' in pub.keys():
+        f.write(" %s," % pub['school'])
+    if 'booktitle' in pub.keys():
+        f.write("in %s." % pub['booktitle'])
+    if pub['year'] != '':
+        f.write(" (%s)" % pub['year'])
 
     # Write links line
     linkstring = ''
 
-    if 'Url' in pub.keys():
-        if 'arxiv' not in pub['Url'].split()[0]:
-            if 'davidketcheson' in pub['Url'].split()[0]:
-                linkstring += ' | <a href="'+pub['Url'].split()[0]+'">Free PDF</a> '
-    if 'Doi' in pub.keys():
-        linkstring += ' | <a href="https://doi.org/'+pub['Doi']+'">Published version</a> '
-    if 'Arxivid' in pub.keys():
-        linkstring += ' | <a href="http://arxiv.org/abs/'+pub['Arxivid']+'">arXiv version</a> '
+    if 'url' in pub.keys():
+        if 'arxiv' not in pub['url'].split()[0]:
+            if 'davidketcheson' in pub['url'].split()[0]:
+                linkstring += ' | <a href="'+pub['url'].split()[0]+'">Free PDF</a> '
+    if 'doi' in pub.keys():
+        linkstring += ' | <a href="https://doi.org/'+pub['doi']+'">Published version</a> '
+    if 'arxivid' in pub.keys():
+        linkstring += ' | <a href="http://arxiv.org/abs/'+pub['arxivid']+'">arXiv version</a> '
 
     with open(paperlinks_path, 'r') as f2:
         links = ast.literal_eval(f2.read())
@@ -166,4 +166,4 @@ def write_entry(pub,f):
 
 def sort_by_year(publications):
     """Takes a list of publications and return it sorted in reverse chronological order."""
-    return sorted(publications, key=lambda p: p.setdefault('Year',''),reverse=True)
+    return sorted(publications, key=lambda p: p.setdefault('year',''),reverse=True)
