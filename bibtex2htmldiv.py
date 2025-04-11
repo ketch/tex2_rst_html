@@ -112,7 +112,7 @@ def write_entry(pub,f):
     if os.path.isfile(os.path.abspath(img_file)):
         f.write('<img src="' + img_dest + pub['pid'] + '.png" align="right" />\n')
     if 'url' in pub:
-        f.write('<a href="'+pub['url'].split()[0].replace('\_','_')+'">')
+        f.write('<a href="'+pub['url'].split()[0].replace(r'\_','_')+'">')
     elif 'doi' in pub.keys():
         f.write('<a href="https://doi.org/'+pub['doi']+'">')
     elif 'arxivid' in pub:
